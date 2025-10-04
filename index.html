@@ -1,16 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo - Nerisa</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo - Nerisa</title>
 
-    <!-- CSS External -->
-    <link rel="stylesheet" href="style.css">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+  <!-- Container -->
+  <div class="bg-pink-50 p-6 rounded-xl shadow-lg w-full max-w-2xl">
+    <h1 class="text-2xl font-bold text-center mb-4">Todo List</h1>
+
+    <!-- Form Add -->
+    <div class="flex gap-2 mb-4">
+      <input type="text" id="todo-input" placeholder="Add a todo..." 
+         class="flex-1 bg-white border border-pink-200 text-gray-800 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-pink-300" required>
+      <input type="date" id="todo-date" 
+        class="bg-white border border-pink-200 text-gray-800 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-pink-300" required>
+      <button onclick="addTodo()" 
+        class="bg-pink-500 hover:bg-pink-600 text-white px-3 py-2 rounded">+</button>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="flex justify-between items-center mb-4">
+      <!-- Filter Dropdown -->
+      <div class="relative inline-block text-left">
+        <button onclick="toggleFilterMenu()" 
+          class="bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded">
+          Filter
+        </button>
+        <!-- Dropdown -->
+        <div id="filter-menu" class="hidden absolute mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-10">
+          <button onclick="applyFilter('all')" class="block px-4 py-2 text-gray-700 hover:bg-pink-100 w-full text-left">All</button>
+          <button onclick="applyFilter('done')" class="block px-4 py-2 text-gray-700 hover:bg-pink-100 w-full text-left">Done</button>
+          <button onclick="applyFilter('pending')" class="block px-4 py-2 text-gray-700 hover:bg-pink-100 w-full text-left">Pending</button>
+          <button onclick="openDateFilter()" class="block px-4 py-2 text-gray-700 hover:bg-pink-100 w-full text-left">By Date</button>
+        </div>
+      </div>
+
+      <!-- Delete All -->
+      <button onclick="deleteAllTodo()" 
+        class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded">
+        Delete All
+      </button>
+    </div>
+
+    <!-- Date filter (hidden) -->
+    <input type="date" id="filter-date" onchange="filterTodo()" 
+      class="hidden mb-4 bg-pink-200 text-gray-700 px-3 py-2 rounded">
+
+    <!-- Todo Table -->
+      <section class="bg-white rounded-lg overflow-hidden border border-pink-200">
+    <table class="w-full text-left border-collapse">
+      <thead class="text-pink-600 border-b border-pink-200 bg-pink-50">
+        <tr>
+          <th class="px-4 py-2">Task</th>
+          <th class="px-4 py-2">Due Date</th>
+          <th class="px-4 py-2">Status</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="todo-list">
+        <tr>
+          <td colspan="4" class="text-center text-gray-400 py-4">No task found</td>
+        </tr>
+      </tbody>
+    </table>
+    </section>
+  </div>
+
+  <!-- Script -->
+  <script src="js/script.js"></script>
 </body>
 </html>
